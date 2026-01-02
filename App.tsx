@@ -24,8 +24,14 @@ const App: React.FC = () => {
   ]);
 
   useEffect(() => {
-    const envKey = process.env.API_KEY;
-    if (envKey) setApiKey(envKey);
+    // Vite uses import.meta.env
+    // Ensure we don't crash if process is undefined (legacy support or safety)
+    try {
+      const envKey = import.meta.env.VITE_API_KEY;
+      if (envKey) setApiKey(envKey);
+    } catch (e) {
+      console.warn("Could not load API key from environment", e);
+    }
   }, []);
 
   const handleAddClip = (clip: ProcessedClip) => {
