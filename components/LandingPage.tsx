@@ -303,13 +303,13 @@ const LandingPage: React.FC<LandingPageProps> = ({ onEnterApp }) => {
               </div>
               <div className="mt-6 space-y-2">
                 <p className="text-slate-500">$ ./start_ow_engine.sh --autopilot</p>
-                <p className="text-blue-400"> > Initializing Scanner...</p>
-                <p className="text-slate-300"> > Found 3 trending deals in "Trading"</p>
-                <p className="text-orange-400"> > DEAL DETECTED: Alpha Signals (40% Comm)</p>
-                <p className="text-slate-300"> > Fetching creative from YouTube...</p>
-                <p className="text-purple-400"> > AI Analysis Complete: 3 Viral Clips Found</p>
-                <p className="text-green-400"> > Posting to TikTok... [SUCCESS]</p>
-                <p className="text-green-400"> > Posting to Reels... [SUCCESS]</p>
+                <p className="text-blue-400"> &gt; Initializing Scanner...</p>
+                <p className="text-slate-300"> &gt; Found 3 trending deals in "Trading"</p>
+                <p className="text-orange-400"> &gt; DEAL DETECTED: Alpha Signals (40% Comm)</p>
+                <p className="text-slate-300"> &gt; Fetching creative from YouTube...</p>
+                <p className="text-purple-400"> &gt; AI Analysis Complete: 3 Viral Clips Found</p>
+                <p className="text-green-400"> &gt; Posting to TikTok... [SUCCESS]</p>
+                <p className="text-green-400"> &gt; Posting to Reels... [SUCCESS]</p>
                 <div className="animate-pulse text-slate-500">_</div>
               </div>
             </div>
