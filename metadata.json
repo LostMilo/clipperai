@@ -1,0 +1,5 @@
+{
+  "name": "ViralClip.ai",
+  "description": "Automated YouTube clipping and virality prediction engine powered by Gemini.",
+  "requestFramePermissions": []
+}
