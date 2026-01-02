@@ -33,9 +33,9 @@ const App: React.FC = () => {
   };
 
   const toggleConnection = (platform: SocialPlatform | 'Whop', connect: boolean) => {
-    setAccounts(prev => prev.map(acc => 
-      acc.platform === platform 
-        ? { ...acc, connected: connect, username: connect ? 'demo_user' : '' } 
+    setAccounts(prev => prev.map(acc =>
+      acc.platform === platform
+        ? { ...acc, connected: connect, username: connect ? 'demo_user' : '' }
         : acc
     ));
   };
@@ -46,7 +46,20 @@ const App: React.FC = () => {
   };
 
   if (showLanding) {
-    return <LandingPage onEnterApp={() => setShowLanding(false)} />;
+    return (
+      <LandingPage
+        onEnterApp={() => {
+          // Simulate login delay
+          const btn = document.getElementById('login-btn');
+          if (btn) btn.innerHTML = 'Authenticating...';
+
+          setTimeout(() => {
+            setShowLanding(false);
+            setCurrentView(View.DASHBOARD);
+          }, 800);
+        }}
+      />
+    );
   }
 
   return (
@@ -59,47 +72,47 @@ const App: React.FC = () => {
         )}
 
         {currentView === View.CLIPPER && (
-          <ClipperView 
-            onAddClip={handleAddClip} 
+          <ClipperView
+            onAddClip={handleAddClip}
             connectedPlatforms={accounts.filter(a => a.connected && a.platform !== 'Whop').map(a => a.platform as SocialPlatform)}
             autoStartDeal={autoStartDeal}
           />
         )}
 
         {currentView === View.CONNECTIONS && (
-            <ConnectionsView 
-                accounts={accounts}
-                onConnect={(p) => toggleConnection(p, true)}
-                onDisconnect={(p) => toggleConnection(p, false)}
-            />
+          <ConnectionsView
+            accounts={accounts}
+            onConnect={(p) => toggleConnection(p, true)}
+            onDisconnect={(p) => toggleConnection(p, false)}
+          />
         )}
 
         {currentView === View.WHOP_ENGINE && (
-            <WhopEngineView 
-                onAutoClipDeal={handleAutoClipDeal} 
-                isWhopConnected={accounts.find(a => a.platform === 'Whop')?.connected || false}
-            />
+          <WhopEngineView
+            onAutoClipDeal={handleAutoClipDeal}
+            isWhopConnected={accounts.find(a => a.platform === 'Whop')?.connected || false}
+          />
         )}
 
         {currentView === View.LIBRARY && (
-            <div className="text-center py-20">
-                <h2 className="text-2xl font-bold text-slate-700">Library Feature Coming Soon</h2>
-                <p className="text-slate-500">View all your historical clips here.</p>
-            </div>
+          <div className="text-center py-20">
+            <h2 className="text-2xl font-bold text-slate-700">Library Feature Coming Soon</h2>
+            <p className="text-slate-500">View all your historical clips here.</p>
+          </div>
         )}
 
         {currentView === View.SETTINGS && (
           <div className="max-w-2xl mx-auto">
             <h2 className="text-3xl font-bold text-white mb-6">Settings</h2>
             <div className="bg-slate-800/50 p-6 rounded-xl border border-slate-700">
-                <h3 className="text-lg font-bold mb-4">API Configuration</h3>
-                <p className="text-slate-400 text-sm mb-4">
-                    The app uses <code className="bg-slate-700 px-1 rounded">process.env.API_KEY</code> by default.
-                </p>
-                <div className="p-4 bg-yellow-500/10 border border-yellow-500/20 rounded-lg text-yellow-200 text-sm">
-                    Note: In this simulated environment, the Gemini Service uses the environment variable. 
-                    Ensure you are running this in an environment where the key is injected.
-                </div>
+              <h3 className="text-lg font-bold mb-4">API Configuration</h3>
+              <p className="text-slate-400 text-sm mb-4">
+                The app uses <code className="bg-slate-700 px-1 rounded">process.env.API_KEY</code> by default.
+              </p>
+              <div className="p-4 bg-yellow-500/10 border border-yellow-500/20 rounded-lg text-yellow-200 text-sm">
+                Note: In this simulated environment, the Gemini Service uses the environment variable.
+                Ensure you are running this in an environment where the key is injected.
+              </div>
             </div>
           </div>
         )}
